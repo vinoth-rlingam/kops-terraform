@@ -1,6 +1,8 @@
 {
     "variables": {
-        "aws_region": "ap-southeast-2"
+        "aws_region": "ap-southeast-2",
+        "aws_access_key": "",
+        "aws_secret_key": ""
 
     },
     "builders": [
@@ -9,6 +11,8 @@
 
         "ami_description": "packer-amazon-linux",
         "instance_type": "t2.micro",
+        "access_key": "{{ user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
         "region": "{{user `aws_region`}}",
         "type": "amazon-ebs",
         "source_ami_filter": {
