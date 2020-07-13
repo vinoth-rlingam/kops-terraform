@@ -1,8 +1,8 @@
 {
     "variables": {
         "aws_region": "ap-southeast-2",
-        "aws_access_key": "AKIAUKGBSZRLWZAZSOFA",
- "aws_secret_key": "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"
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+ "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
     },
     "builders": [
       {
