@@ -1,8 +1,8 @@
 {
     "variables": {
-        "aws_region": "${env.AWS_DEFAULT_REGION}",
-        "aws_access_key": "${env.AWS_ACCESS_KEY_ID}",
-        "aws_secret_key": "${env.AWS_SECRET_ACCESS_KEY}"
+        "aws_region": "$AWS_DEFAULT_REGION",
+        "aws_access_key": "$AWS_ACCESS_KEY_ID",
+        "aws_secret_key": "$AWS_SECRET_ACCESS_KEY"
     },
     "builders": [
       {
