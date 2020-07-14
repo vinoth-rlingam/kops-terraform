@@ -1,13 +1,11 @@
 #!/bin/bash
 set -ex
-terraform -v
 
 echo "Initializing terraform...."
 export TF_VAR_stateBucketName=$2
 export TF_VAR_stateBucketRegion=$1
 export TF_VAR_region=$1
 export TF_VAR_stateBucketKey=terraform.tfstate
-
 
 echo $TF_VAR_stateBucketName "and" $TF_VAR_stateBucketKey "and" $TF_VAR_region
 
