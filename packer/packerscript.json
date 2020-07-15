@@ -46,7 +46,7 @@
       {
         "type": "file",
         "source" : "../credentials",
-        "destination" : "/home/ec2-user/.aws/credentials'"
+        "destination" : "/home/ec2-user/.aws/credentials"
       }
 
     ]
