@@ -41,12 +41,12 @@
       },
       {
         "type": "shell",
-        "inline": ["sudo mkdir /home/ec2-user/.aws"]
+        "inline": ["sudo mkdir $HOME/.aws"]
       },
       {
         "type": "file",
         "source" : "../credentials",
-        "destination" : "/home/ec2-user/.aws/credentials"
+        "destination" : "$HOME/.aws/credentials"
       }
     ]
   }
