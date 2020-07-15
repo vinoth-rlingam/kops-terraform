@@ -41,12 +41,12 @@
       },
       {
         "type": "shell",
-        "inline": ["mkdir .aws"]
+        "inline": ["mkdir '.aws'"]
       },
       {
         "type": "file",
         "source" : "../credentials",
-        "destination" : ".aws"
+        "destination" : "'.aws'"
       }
 
     ]
