@@ -13,7 +13,7 @@ resource "aws_instance" "kops-bootstrapper" {
 }
 
 resource "aws_security_group" "ec2-sg" {
-  name = var.instance_name
+  name = "kops-bootstrapper-sg"
 
   egress {
     from_port   = 0
