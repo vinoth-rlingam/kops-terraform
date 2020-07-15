@@ -44,6 +44,7 @@ resource "null_resource" "remote_provisioner" {
     user  = "ec2-user"
     port  = "22"
     agent = true
+    private_key = "${file("./kubelinuxserver.ppk")}"
   }
 
   provisioner "file" {
