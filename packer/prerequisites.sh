@@ -23,9 +23,8 @@ pip3 install awscli --upgrade --user
 echo "Installing Terraform..."
 sudo mkdir terraform && cd terraform
 sudo wget https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-sudo yum install unzip
 sudo unzip terraform_0.12.28_linux_amd64.zip
-export PATH=$PATH:$HOME/terraform
+sudo mv /home/ec2-user/terraform/terraform /usr/local/bin
 
 #Installing jq
 echo "Installing jq..."

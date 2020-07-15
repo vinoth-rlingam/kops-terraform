@@ -34,14 +34,11 @@
         "type": "shell",
         "script": "prerequisites.sh"
       },
-      {
-        "type": "shell",
-        "inline": ["mkdir api"]
-      },
+
       {
         "type": "file",
         "source" : "../terraform-kops",
-        "destination" : "api"
+        "destination" : "/home/ec2-user"
       }
     ]
   }
