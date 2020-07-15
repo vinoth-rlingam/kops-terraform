@@ -29,3 +29,4 @@ resource "null_resource" "remote_provisioner" {
     source      = "terraform-kops/*"
     destination = "/usr/local/bin"
   }
+}
