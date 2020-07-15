@@ -2,13 +2,28 @@ resource "aws_instance" "kops-bootstrapper" {
   ami                    = "${var.API_INSTANCE_AMI}"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-  key_name               = "kubelinuxserver"
+
 
   # This EC2 Instance has a public IP and will be accessible directly from the public Internet
   associate_public_ip_address = true
 
   tags = {
     Name = "kops-bootstrapper"
+  }
+
+   provisioner "remote-exec" {
+    connection {
+    type  = "ssh"
+    host  = aws_instance.kops-bootstrapper.public_ip
+    user  = "ec2-user"
+    port  = "22"
+    private_key = "${file("./kopsterraform.pem")}"
+  }
+    inline = [
+      "cd /home/ec2-user/terraform-kops",
+      "chmod +x run.bash",
+      "./run.bash ap-southeast remote-terraform-kops-state"
+    ]
   }
 }
 
@@ -34,25 +49,9 @@ resource "aws_security_group" "ec2-sg" {
   }
 }
 
-resource "null_resource" "remote_provisioner" {
-  triggers = {
-    public_ip = aws_instance.kops-bootstrapper.public_ip
-  }
 
 
 
-  provisioner "remote-exec" {
-    connection {
-    type  = "ssh"
-    host  = aws_instance.kops-bootstrapper.public_ip
-    user  = "ec2-user"
-    port  = "22"
-    private_key = "${file("./kopsterraform.pem")}"
-  }
-    inline = [
-      "cd /home/ec2-user/terraform-kops",
-      "chmod +x run.bash",
-      "./run.bash ap-southeast remote-terraform-kops-state"
-    ]
-  }
-}
+
+
+
