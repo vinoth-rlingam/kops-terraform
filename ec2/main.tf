@@ -44,7 +44,7 @@ resource "null_resource" "remote_provisioner" {
     host  = aws_instance.kops-bootstrapper.public_ip
     user  = "ec2-user"
     port  = "22"
-    private_key = ${file(../kubelinuxserver.ppk)}
+    private_key = ${file("../kubelinuxserver.ppk")}
   }
 
   provisioner "remote-exec" {
