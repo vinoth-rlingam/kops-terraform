@@ -48,7 +48,7 @@ resource "null_resource" "remote_provisioner" {
 
   provisioner "remote-exec" {
     inline = [
-      "cd /home/ec2-user/terraform-kops"
+      "cd /home/ec2-user/terraform-kops",
       "chmod +x run.bash",
       "./run.bash ap-southeast remote-terraform-kops-state",
     ]
