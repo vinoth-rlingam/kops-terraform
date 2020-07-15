@@ -31,6 +31,15 @@ resource "aws_security_group" "ec2-sg" {
     # allow SSH requests from trusted servers, such as a bastion host or VPN server.
     cidr_blocks = ["0.0.0.0/0"]
   }
+  {
+    from_port = 22
+    to_port   = 22
+    protocol  = "ssh"
+
+    # To keep this example simple, we allow incoming SSH requests from any IP. In real-world usage, you should only
+    # allow SSH requests from trusted servers, such as a bastion host or VPN server.
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "null_resource" "remote_provisioner" {
