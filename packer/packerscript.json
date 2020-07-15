@@ -38,15 +38,6 @@
         "type": "file",
         "source" : "../terraform-kops",
         "destination" : "/home/ec2-user"
-      },
-      {
-        "type": "shell",
-        "inline": ["sudo mkdir ~/.aws"]
-      },
-      {
-        "type": "file",
-        "source" : "../credentials",
-        "destination" : "~/.aws"
       }
     ]
   }
