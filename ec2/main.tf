@@ -46,8 +46,11 @@ resource "null_resource" "remote_provisioner" {
     port  = "22"
   }
 
-  provisioner "file" {
-    source      = "terraform-kops/*"
-    destination = "/usr/local/bin"
+  provisioner "remote-exec" {
+    inline = [
+      "cd /home/ec2-user/terraform-kops"
+      "chmod +x run.bash",
+      "./run.bash ap-southeast remote-terraform-kops-state",
+    ]
   }
 }

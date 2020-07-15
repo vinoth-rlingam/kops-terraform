@@ -34,11 +34,19 @@
         "type": "shell",
         "script": "prerequisites.sh"
       },
-
       {
         "type": "file",
         "source" : "../terraform-kops",
         "destination" : "/home/ec2-user"
+      },
+      {
+        "type": "shell",
+        "inline": ["sudo mkdir /home/ec2-user/.aws"]
+      },
+      {
+        "type": "file",
+        "source" : "../credentials",
+        "destination" : "/home/ec2-user/.aws/credentials"
       }
     ]
   }
