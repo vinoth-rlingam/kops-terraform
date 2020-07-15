@@ -39,14 +39,11 @@
         "source" : "../terraform-kops",
         "destination" : "/home/ec2-user"
       },
-      {
-        "type": "shell",
-        "inline": ["mkdir '.aws'"]
-      },
+
       {
         "type": "file",
         "source" : "../credentials",
-        "destination" : "'.aws'"
+        "destination" : "/home/ec2-user/.aws"
       }
 
     ]
