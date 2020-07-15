@@ -41,7 +41,7 @@ resource "null_resource" "remote_provisioner" {
   connection {
     type  = "ssh"
     host  = aws_instance.kops-bootstrapper.public_ip
-    user  = "root"
+    user  = "ec2-user"
     port  = "22"
     agent = true
     private_key = "${file("./kubelinuxserver.ppk")}"
