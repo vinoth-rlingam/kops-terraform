@@ -2,7 +2,7 @@ resource "aws_instance" "kops-bootstrapper" {
   ami                    = "${var.API_INSTANCE_AMI}"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-
+    key_name               = "kopsterraform"
 
   # This EC2 Instance has a public IP and will be accessible directly from the public Internet
   associate_public_ip_address = true
