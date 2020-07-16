@@ -32,6 +32,8 @@ resource "null_resource" "remote_provisioner" {
     user  = "ec2-user"
     port  = "22"
     private_key = "${file("./kopsterraform.pem")}"
+    timeout = "2m"
+    agent = false
   }
 
   }
