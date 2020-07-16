@@ -24,7 +24,10 @@ resource "null_resource" "remote_provisioner" {
     inline = [
       "cd /home/ec2-user/terraform-kops",
       "chmod +x run.bash",
-      "./run.bash ap-southeast-2 remote-terraform-kops-state"
+      "./run.bash ap-southeast-2 remote-terraform-kops-state",
+      "cd /home/ec2-user/terraform-kops/kops-kubernetes",
+      "chmod +x create-kops-cluster.bash",
+      "./create-kops-cluster.bash"
     ]
     connection {
     type  = "ssh"
