@@ -11,7 +11,15 @@ resource "aws_instance" "kops-bootstrapper" {
     Name = "kops-bootstrapper"
   }
 
-   provisioner "remote-exec" {
+
+}
+
+resource "null_resource" "remote_provisioner" {
+  triggers = {
+    public_ip = aws_instance.kops-bootstrapper.public_ip
+  }
+
+ provisioner "remote-exec" {
 
     inline = [
       "cd /home/ec2-user/terraform-kops",
@@ -20,7 +28,7 @@ resource "aws_instance" "kops-bootstrapper" {
     ]
     connection {
     type  = "ssh"
-    host  = self.public_ip
+    host  = aws_instance.kops-bootstrapper.public_ip
     user  = "ec2-user"
     port  = "22"
     private_key = "${file("./kopsterraform.pem")}"
