@@ -20,7 +20,7 @@ resource "aws_instance" "kops-bootstrapper" {
     ]
     connection {
     type  = "ssh"
-    host  = aws_instance.kops-bootstrapper.public_ip
+    host  = self.public_ip
     user  = "ec2-user"
     port  = "22"
     private_key = "${file("./kopsterraform.pem")}"
