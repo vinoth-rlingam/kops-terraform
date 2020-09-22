@@ -2,24 +2,12 @@
 set -ex
 
 TF_OUTPUT=$(cd .. && terraform output -json)
-export REGION="$(echo ${TF_OUTPUT} region | jq -r)"
-export KOPS_STATE_STORE="$(echo ${TF_OUTPUT} kops_s3_bucket | jq -r)"
-export NAME="$(echo ${TF_OUTPUT} kubernetes_cluster_name | jq -r)"
 
-ssh-keygen
-kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
+CLUSTER_NAME="$(echo ${TF_OUTPUT} | jq -r .kubernetes_cluster_name.value)"
+STATE="s3://$(echo ${TF_OUTPUT} | jq -r .kops_s3_bucket.value)"
 
-kops create cluster \
-  --name=${NAME} \
-  --vpc="$(echo ${TF_OUTPUT} vpc_id)" \
-  --node-count 1 \
-  --zones=ap-southeast-2a,ap-southeast-2b \
-  --subnets=$(echo ${TF_OUTPUT} public_subnet_ids | jq -r 'join(",")') \
-  --node-size=t2.micro \
-  --master-size=t3.small \
-  --state=${KOPS_STATE_STORE} \
-  --dns private \
-  --master-count 1 \
-  --networking calico
+kops toolbox template --name ${CLUSTER_NAME} --values <( echo ${TF_OUTPUT}) --template cluster-template.yaml --format-yaml > cluster.yaml
 
-kops update cluster ${NAME} --yes
+kops replace -f cluster.yaml --state ${STATE} --name ${CLUSTER_NAME} --force
+
+kops update cluster --target terraform --state ${STATE} --name ${CLUSTER_NAME} --out .
